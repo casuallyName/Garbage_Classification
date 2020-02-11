@@ -1,0 +1,2 @@
+epoch | Learning Rate | Train Loss | Valid Loss | Train Acc | Valid Acc | Save | 
+3 | 0.0010 | 0.2104 | 0.1341 | 92.6358 | 95.1368 | False | 
