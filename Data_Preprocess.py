@@ -139,15 +139,23 @@ def data_shuffle_split(size, img_path_list):
         train_size = int(len(img_path_list) * size)
         # 截取训练集
         train_img_list = img_path_list[:train_size]
+        # 4分类
         train_img_dict = dict([[item['img_path'], item['img_4lable']] for item in train_img_list])
         train_json_path = os.path.join(path, 'train_img_dict.json')
-        # 训练集写入json文件
+        __json_store(train_json_path, train_img_dict)
+        # 40分类
+        train_img_dict = dict([[item['img_path'], item['img_lable']] for item in train_img_list])
+        train_json_path = os.path.join(path, 'train_img_dict_40.json')
         __json_store(train_json_path, train_img_dict)
         # 截取测试集
         verify_img_list = img_path_list[train_size:]
+        # 4分类
         verify_img_dict = dict([[item['img_path'], item['img_4lable']] for item in verify_img_list])
         verify_json_path = os.path.join(path, 'verify_img_dict.json')
-        #  测试集写入json文件
+        __json_store(verify_json_path, verify_img_dict)
+        # 40分类
+        verify_img_dict = dict([[item['img_path'], item['img_lable']] for item in verify_img_list])
+        verify_json_path = os.path.join(path, 'verify_img_dict_40.json')
         __json_store(verify_json_path, verify_img_dict)
 
         # with open(os.path.join(path,'train_img_list.txt'),'w') as f:
@@ -206,33 +214,42 @@ def data_visualization(data_path, show_web=True,
                     x轴数据倾斜角度 默认值0
     :return:
     '''
-    train_json_path = os.path.join(data_path.lstrip('/All_data'), 'train_img_dict.json')
+    train_json_path = os.path.join(data_path, 'train_img_dict.json')
     if not os.path.exists(train_json_path):
         raise FileNotFoundError('请先执行 data_shuffle_split 方法划分数据集')
     train_json_dict = __json_load(train_json_path)
     train_dict = dict(Counter(train_json_dict.values()))  # Counter统计元素出现的次数
     train_dict = dict(sorted(train_dict.items()))
-    verify_json_path = os.path.join(data_path.lstrip('/All_data'), 'verify_img_dict.json')
+    verify_json_path = os.path.join(data_path, 'verify_img_dict.json')
     if not os.path.exists(verify_json_path):
         raise FileNotFoundError('请先执行 data_shuffle_split 方法划分数据集')
     verify_json_dict = __json_load(verify_json_path)
     verify_dict = dict(Counter(verify_json_dict.values()))  # Counter统计元素出现的次数
     verify_dict = dict(sorted(verify_dict.items()))
-    # 校验数据
-    print('校验数据:  ', end='')
-    assert train_dict.keys() == verify_dict.keys()
-    print('完成')
+    all_dict = dict([[k, train_dict[k] + verify_dict[k]] for k in train_dict])
+    train_json_path_40 = os.path.join(data_path, 'train_img_dict_40.json')
+    if not os.path.exists(train_json_path_40):
+        raise FileNotFoundError('请先执行 data_shuffle_split 方法划分数据集')
+    train_json_dict_40 = __json_load(train_json_path_40)
+    train_dict_40 = dict(Counter(train_json_dict_40.values()))  # Counter统计元素出现的次数
+    train_dict_40 = dict(sorted(train_dict_40.items()))
+    verify_json_path_40 = os.path.join(data_path, 'verify_img_dict_40.json')
+    if not os.path.exists(verify_json_path_40):
+        raise FileNotFoundError('请先执行 data_shuffle_split 方法划分数据集')
+    verify_json_dict_40 = __json_load(verify_json_path_40)
+    verify_dict_40 = dict(Counter(verify_json_dict_40.values()))  # Counter统计元素出现的次数
+    verify_dict_40 = dict(sorted(verify_dict_40.items()))
+    all_dict_40 = dict([[k, train_dict_40[k] + verify_dict_40[k]] for k in train_dict_40])
 
     # 40分类数据可视化
     garbage_classify_rule = __json_load(
-        os.path.join(data_path.lstrip('/All_data'), 'garbage_classify_rule.json'))
+        os.path.join(data_path, 'garbage_classify_rule.json'))
     # x轴输数据
-    x = ["{}-{}".format(id, garbage_classify_rule[str(id)]) for id in train_dict.keys()]
-    img_path_list, _, img_label2count_dict = get_img_info(data_path)
+    x=["{}-{}".format(id, garbage_classify_rule[str(id)]) for id in train_dict_40.keys()]
     # y轴数据
-    data_y = list(img_label2count_dict.values())
-    train_y = list(train_dict.values())
-    verify_y = list(verify_dict.values())
+    data_y = list(all_dict_40.values())
+    train_y = list(train_dict_40.values())
+    verify_y = list(verify_dict_40.values())
     # 创建Bar示例
     bar = Bar(init_opts=opts.InitOpts(width='{}px'.format(size1['width']), height='{}px'.format(size1['height'])))
     bar.add_xaxis(xaxis_data=x)
@@ -245,72 +262,47 @@ def data_visualization(data_path, show_web=True,
         xaxis_opts=opts.AxisOpts(axislabel_opts=opts.LabelOpts(rotate=size1['rotate']))  # 使x轴数据标签倾斜
     )
     # 展示图表
-    bar.render('All_Train_Verify.html')
+    bar.render('All_Train_Verify_40.html')
     bar_path = os.getcwd()
     if show_web:
-        url = 'file://' + bar_path + '/All_Train_Verify.html'
+        url = 'file://' + bar_path + '/All_Train_Verify_40.html'
         webbrowser.open(url)
     else:
-        print('打开 \'' + bar_path + '/All_Train_Verify.html\'以查看图表')
+        print('打开 \'' + bar_path + '/All_Train_Verify_40.html\'以查看图表')
 
     # 4分类数据可视化
-    data_4y = {}
-    # train_4y = {}
-    # verify_4y = {}
-    garbage_classify_rule = __json_load(os.path.join(data_path, 'garbage_classify_rule.json'))
-    garbage_index_classify = __json_load(os.path.join(data_path, 'garbage_index_classify.json'))
-    train_img_dict = __json_load(os.path.join(data_path, 'train_img_dict.json'))
-    verify_img_dict = __json_load(os.path.join(data_path, 'verify_img_dict.json'))
-    # 更新字典  40类更新为4类
-    for item in garbage_classify_rule:
-        garbage_classify_rule[item] = garbage_index_classify[garbage_classify_rule[item].split('/')[0]]
-    # 统计总数据
-    for item in img_path_list:
-        data_4y[item['img_4lable']] = data_4y.get(item['img_4lable'], 0) + 1
-    # 总数据排序
-    data_4y = dict(sorted(data_4y.items(), key=lambda item: item[0]))
-    # 更新train_img_dict字典  40类更新为4类
-    for item in train_img_dict:
-        train_img_dict[item] = garbage_classify_rule[str(train_img_dict[item])]
-    # 统计各类数量并排序
-    train_4y = dict(sorted((dict(Counter(train_img_dict.values()))).items(), key=lambda item: item[0]))
-    # 更新verify_img_dict字典  40类更新为4类
-    for item in verify_img_dict:
-        verify_img_dict[item] = garbage_classify_rule[str(verify_img_dict[item])]
-    # 统计各类数量并排序
-    verify_4y = dict(sorted((dict(Counter(verify_img_dict.values()))).items(), key=lambda item: item[0]))
-
-    # x轴数据
-    x = ["其他垃圾", "厨余垃圾", "可回收物", "有害垃圾"]
+    garbage_classify_rule = __json_load(
+        os.path.join(data_path, 'garbage_classify_index.json'))
+    # x轴输数据
+    x = ["{}-{}".format(id, garbage_classify_rule[str(id)]) for id in train_dict.keys()]
     # y轴数据
-    data_4y = list(data_4y.values())
-    train_4y = list(train_4y.values())
-    verify_4y = list(verify_4y.values())
+    data_y = list(all_dict.values())
+    train_y = list(train_dict.values())
+    verify_y = list(verify_dict.values())
     # 创建Bar示例
-    bar = Bar(init_opts=opts.InitOpts('{}px'.format(size2['width']), '{}px'.format(size2['height'])))
+    bar = Bar(init_opts=opts.InitOpts(width='{}px'.format(size1['width']), height='{}px'.format(size1['height'])))
     bar.add_xaxis(xaxis_data=x)
-    bar.add_yaxis(series_name='All', yaxis_data=data_4y)
-    bar.add_yaxis(series_name='Train', yaxis_data=train_4y)
-    bar.add_yaxis(series_name='Verify', yaxis_data=verify_4y)
-
+    bar.add_yaxis(series_name='All', yaxis_data=data_y)
+    bar.add_yaxis(series_name='Train', yaxis_data=train_y)
+    bar.add_yaxis(series_name='Verify', yaxis_data=verify_y)
     # 设置全局参数
     bar.set_global_opts(
-        title_opts=opts.TitleOpts(title='4分类\n垃圾分类 不同类别数据分布'),
-        xaxis_opts=opts.AxisOpts(axislabel_opts=opts.LabelOpts(rotate=size2['rotate']))  # 使x轴数据标签倾斜
+        title_opts=opts.TitleOpts(title='4分类\n垃圾分类 All/Train/Verify 不同类别数据分布'),
+        xaxis_opts=opts.AxisOpts(axislabel_opts=opts.LabelOpts(rotate=size1['rotate']))  # 使x轴数据标签倾斜
     )
     # 展示图表
-    bar.render('4classify.html')
-    # bar.render_notebook()
+    bar.render('All_Train_Verify_4.html')
     bar_path = os.getcwd()
     if show_web:
-        url = 'file://' + bar_path + '/4classify.html'
+        url = 'file://' + bar_path + '/All_Train_Verify_4.html'
         webbrowser.open(url)
     else:
-        print('打开 \'' + bar_path + '/4classify.html\'以查看图表')
+        print('打开 \'' + bar_path + '/All_Train_Verify_4.html\'以查看图表')
 
-    # 图片尺寸数据直方图
-    data = get_img_size(data_path)
-    ratio_list = [item[3] for item in data]  # 获取img_size中的比例数据
+# 图片尺寸数据直方图
+def img_size_visualization(imgs_size):
+
+    ratio_list = [item[3] for item in imgs_size]  # 获取img_size中的比例数据
     new_ratio_list = list(filter(lambda x: x > 0.5 and x <= 2, ratio_list))
     # 创建示例对象
     sns.set()
@@ -323,7 +315,6 @@ def data_visualization(data_path, show_web=True,
     ax = sns.distplot(new_ratio_list)  # 数据分布（0，2）
     plt.title('过滤后的数据分布（0.5<x<2）')
     plt.show()
-
 
 # 进度展示
 def __processBar(message, num, total):
@@ -377,8 +368,11 @@ def __version__():
 
 # 测试
 if __name__ == '__main__':
+    __version__()
     Root_Path = ''
     Data_Path = Root_Path + 'data/'
-    img_path_list, img_name2label_dict, img_label2count_dict = get_img_info(Data_Path)
-    train_json_path, verify_json_path, train_img_list, verify_img_list = data_shuffle_split(0.8, img_path_list)
-    # data_visualization(Data_Path, show_web=False)
+    #img_path_list, img_name2label_dict, img_label2count_dict = get_img_info(Data_Path)
+    #train_json_path, verify_json_path, train_img_list, verify_img_list = data_shuffle_split(0.8, img_path_list)
+    data_visualization(Data_Path, show_web=False)
+    imgs_size = get_img_size(Data_Path)
+    img_size_visualization(imgs_size)

@@ -84,7 +84,7 @@ def fileNameChangeAndMark(files, path, start_Num=0):
         )
         os.rename('{}/{}'.format(path, file), '{}/{}'.format(path, 'img_{}.jpg'.format(start_Num)))
         with open('{}/img_{}.txt'.format(path, start_Num), 'w') as f:
-            f.write('img_{}.jpg, {}'.format(start_Num, file.split('_')[1]))
+            f.write('img_{}.jpg, {}'.format(start_Num, file.split('_')[2]))
         start_Num += 1
 
 
@@ -148,10 +148,10 @@ def picFilter(files, path, to_path, model_ft, start_Num=0):
 
 
 if __name__ == '__main__':
-    model_ft = __init__()
+    # model_ft = __init__()
     path = 'New_Pic'
     to_path = 'data/All_data'
     files = getFileName(path)
-    # fileCopy(files, path, to_path)
-    picFilter(files, path, to_path, model_ft, start_Num=19736)
-    # fileNameChangeAndMark(files, to_path, 19736)
+    fileCopy(files, path, to_path)
+    # picFilter(files, path, to_path, model_ft, start_Num=19736)
+    fileNameChangeAndMark(files, to_path, 19736)

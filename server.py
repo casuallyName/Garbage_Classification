@@ -42,12 +42,11 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')  # 设备
 print('{} 设备类型：\t{}'.format(time.strftime("[%d/%b/%Y %H:%M:%S]", time.localtime()), str(device).upper()))
 num_classes = len(class_id2name)
 model_name = args.model_name
-model_path = os.path.join(args.pth_files,args.pth_name)
-#'pth_files/garbage_resnext101_model_7_9417_9500.pth'
-print('{} 模型路径：\t{}'.format(time.strftime("[%d/%b/%Y %H:%M:%S]", time.localtime()), model_path))
-
 model_ft = initital_model(model_name, num_classes, feature_extract=True)
 model_ft.to(device)  # 设置模型运行环境
+model_path = os.path.join(args.pth_path,args.pth_name)
+#'pth_files/garbage_resnext101_model_7_9417_9500.pth'
+print('{} 模型路径：\t{}'.format(time.strftime("[%d/%b/%Y %H:%M:%S]", time.localtime()), model_path))
 # 显存不够了，放内存上吧
 model_ft.load_state_dict(torch.load(model_path, map_location='cpu'))
 # note::

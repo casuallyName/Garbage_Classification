@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Awesome-pyecharts</title>
+            <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
+
+</head>
+<body>
+    <div id="29e394a4a1ef4c1a99a0ec7a80e7bcb6" class="chart-container" style="width:1500px; height:500px;"></div>
+    <script>
+        var chart_29e394a4a1ef4c1a99a0ec7a80e7bcb6 = echarts.init(
+            document.getElementById('29e394a4a1ef4c1a99a0ec7a80e7bcb6'), 'white', {renderer: 'canvas'});
+        var option_29e394a4a1ef4c1a99a0ec7a80e7bcb6 = {
+    "animation": true,
+    "animationThreshold": 2000,
+    "animationDuration": 1000,
+    "animationEasing": "cubicOut",
+    "animationDelay": 0,
+    "animationDurationUpdate": 300,
+    "animationEasingUpdate": "cubicOut",
+    "animationDelayUpdate": 0,
+    "color": [
+        "#c23531",
+        "#2f4554",
+        "#61a0a8",
+        "#d48265",
+        "#749f83",
+        "#ca8622",
+        "#bda29a",
+        "#6e7074",
+        "#546570",
+        "#c4ccd3",
+        "#f05b72",
+        "#ef5b9c",
+        "#f47920",
+        "#905a3d",
+        "#fab27b",
+        "#2a5caa",
+        "#444693",
+        "#726930",
+        "#b2d235",
+        "#6d8346",
+        "#ac6767",
+        "#1d953f",
+        "#6950a1",
+        "#918597"
+    ],
+    "series": [
+        {
+            "type": "bar",
+            "name": "All",
+            "data": [
+                499,
+                370,
+                292,
+                147,
+                450,
+                477,
+                533,
+                570,
+                467,
+                519,
+                509,
+                743,
+                370,
+                428,
+                437,
+                516,
+                510,
+                499,
+                498,
+                432,
+                255,
+                686,
+                415,
+                355,
+                435,
+                894,
+                482,
+                575,
+                581,
+                536,
+                444,
+                574,
+                386,
+                387,
+                409,
+                414,
+                344,
+                452,
+                576,
+                489
+            ],
+            "barCategoryGap": "20%",
+            "label": {
+                "show": true,
+                "position": "top",
+                "margin": 8
+            }
+        },
+        {
+            "type": "bar",
+            "name": "Train",
+            "data": [
+                389,
+                288,
+                231,
+                117,
+                359,
+                382,
+                404,
+                440,
+                378,
+                413,
+                427,
+                598,
+                302,
+                338,
+                355,
+                397,
+                414,
+                395,
+                404,
+                345,
+                201,
+                551,
+                335,
+                271,
+                341,
+                716,
+                395,
+                474,
+                462,
+                432,
+                365,
+                473,
+                305,
+                328,
+                341,
+                330,
+                270,
+                362,
+                452,
+                384
+            ],
+            "barCategoryGap": "20%",
+            "label": {
+                "show": true,
+                "position": "top",
+                "margin": 8
+            }
+        },
+        {
+            "type": "bar",
+            "name": "Verify",
+            "data": [
+                110,
+                82,
+                61,
+                30,
+                91,
+                95,
+                129,
+                130,
+                89,
+                106,
+                82,
+                145,
+                68,
+                90,
+                82,
+                119,
+                96,
+                104,
+                94,
+                87,
+                54,
+                135,
+                80,
+                84,
+                94,
+                178,
+                87,
+                101,
+                119,
+                104,
+                79,
+                101,
+                81,
+                59,
+                68,
+                84,
+                74,
+                90,
+                124,
+                105
+            ],
+            "barCategoryGap": "20%",
+            "label": {
+                "show": true,
+                "position": "top",
+                "margin": 8
+            }
+        }
+    ],
+    "legend": [
+        {
+            "data": [
+                "All",
+                "Train",
+                "Verify"
+            ],
+            "selected": {
+                "All": true,
+                "Train": true,
+                "Verify": true
+            },
+            "show": true,
+            "padding": 5,
+            "itemGap": 10,
+            "itemWidth": 25,
+            "itemHeight": 14
+        }
+    ],
+    "tooltip": {
+        "show": true,
+        "trigger": "item",
+        "triggerOn": "mousemove|click",
+        "axisPointer": {
+            "type": "line"
+        },
+        "textStyle": {
+            "fontSize": 14
+        },
+        "borderWidth": 0
+    },
+    "xAxis": [
+        {
+            "show": true,
+            "scale": false,
+            "nameLocation": "end",
+            "nameGap": 15,
+            "gridIndex": 0,
+            "axisLabel": {
+                "show": true,
+                "position": "top",
+                "rotate": 15,
+                "margin": 8
+            },
+            "inverse": false,
+            "offset": 0,
+            "splitNumber": 5,
+            "minInterval": 0,
+            "splitLine": {
+                "show": false,
+                "lineStyle": {
+                    "width": 1,
+                    "opacity": 1,
+                    "curveness": 0,
+                    "type": "solid"
+                }
+            },
+            "data": [
+                "0-\u5176\u4ed6\u5783\u573e/\u4e00\u6b21\u6027\u5feb\u9910\u76d2",
+                "1-\u5176\u4ed6\u5783\u573e/\u6c61\u635f\u5851\u6599",
+                "2-\u5176\u4ed6\u5783\u573e/\u70df\u8482",
+                "3-\u5176\u4ed6\u5783\u573e/\u7259\u7b7e",
+                "4-\u5176\u4ed6\u5783\u573e/\u7834\u788e\u82b1\u76c6\u53ca\u789f\u7897",
+                "5-\u5176\u4ed6\u5783\u573e/\u7af9\u7b77",
+                "6-\u53a8\u4f59\u5783\u573e/\u5269\u996d\u5269\u83dc",
+                "7-\u53a8\u4f59\u5783\u573e/\u5927\u9aa8\u5934",
+                "8-\u53a8\u4f59\u5783\u573e/\u6c34\u679c\u679c\u76ae",
+                "9-\u53a8\u4f59\u5783\u573e/\u6c34\u679c\u679c\u8089",
+                "10-\u53a8\u4f59\u5783\u573e/\u8336\u53f6\u6e23",
+                "11-\u53a8\u4f59\u5783\u573e/\u83dc\u53f6\u83dc\u6839",
+                "12-\u53a8\u4f59\u5783\u573e/\u86cb\u58f3",
+                "13-\u53a8\u4f59\u5783\u573e/\u9c7c\u9aa8",
+                "14-\u53ef\u56de\u6536\u7269/\u5145\u7535\u5b9d",
+                "15-\u53ef\u56de\u6536\u7269/\u5305",
+                "16-\u53ef\u56de\u6536\u7269/\u5316\u5986\u54c1\u74f6",
+                "17-\u53ef\u56de\u6536\u7269/\u5851\u6599\u73a9\u5177",
+                "18-\u53ef\u56de\u6536\u7269/\u5851\u6599\u7897\u76c6",
+                "19-\u53ef\u56de\u6536\u7269/\u5851\u6599\u8863\u67b6",
+                "20-\u53ef\u56de\u6536\u7269/\u5feb\u9012\u7eb8\u888b",
+                "21-\u53ef\u56de\u6536\u7269/\u63d2\u5934\u7535\u7ebf",
+                "22-\u53ef\u56de\u6536\u7269/\u65e7\u8863\u670d",
+                "23-\u53ef\u56de\u6536\u7269/\u6613\u62c9\u7f50",
+                "24-\u53ef\u56de\u6536\u7269/\u6795\u5934",
+                "25-\u53ef\u56de\u6536\u7269/\u6bdb\u7ed2\u73a9\u5177",
+                "26-\u53ef\u56de\u6536\u7269/\u6d17\u53d1\u6c34\u74f6",
+                "27-\u53ef\u56de\u6536\u7269/\u73bb\u7483\u676f",
+                "28-\u53ef\u56de\u6536\u7269/\u76ae\u978b",
+                "29-\u53ef\u56de\u6536\u7269/\u7827\u677f",
+                "30-\u53ef\u56de\u6536\u7269/\u7eb8\u677f\u7bb1",
+                "31-\u53ef\u56de\u6536\u7269/\u8c03\u6599\u74f6",
+                "32-\u53ef\u56de\u6536\u7269/\u9152\u74f6",
+                "33-\u53ef\u56de\u6536\u7269/\u91d1\u5c5e\u98df\u54c1\u7f50",
+                "34-\u53ef\u56de\u6536\u7269/\u9505",
+                "35-\u53ef\u56de\u6536\u7269/\u98df\u7528\u6cb9\u6876",
+                "36-\u53ef\u56de\u6536\u7269/\u996e\u6599\u74f6",
+                "37-\u6709\u5bb3\u5783\u573e/\u5e72\u7535\u6c60",
+                "38-\u6709\u5bb3\u5783\u573e/\u8f6f\u818f",
+                "39-\u6709\u5bb3\u5783\u573e/\u8fc7\u671f\u836f\u7269"
+            ]
+        }
+    ],
+    "yAxis": [
+        {
+            "show": true,
+            "scale": false,
+            "nameLocation": "end",
+            "nameGap": 15,
+            "gridIndex": 0,
+            "inverse": false,
+            "offset": 0,
+            "splitNumber": 5,
+            "minInterval": 0,
+            "splitLine": {
+                "show": false,
+                "lineStyle": {
+                    "width": 1,
+                    "opacity": 1,
+                    "curveness": 0,
+                    "type": "solid"
+                }
+            }
+        }
+    ],
+    "title": [
+        {
+            "text": "40\u5206\u7c7b\n\u5783\u573e\u5206\u7c7b All/Train/Verify \u4e0d\u540c\u7c7b\u522b\u6570\u636e\u5206\u5e03",
+            "padding": 5,
+            "itemGap": 10
+        }
+    ]
+};
+        chart_29e394a4a1ef4c1a99a0ec7a80e7bcb6.setOption(option_29e394a4a1ef4c1a99a0ec7a80e7bcb6);
+    </script>
+</body>
+</html>

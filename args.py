@@ -32,12 +32,12 @@ parser.add_argument('-e', '--evaluate', dest='evaluate', action='store_true', he
 
 # 4. 批量数据加载尺寸
 parser.add_argument('--batch_size', default=12, type=int, metavar='SIZE', help=' 加载包大小')
-parser.add_argument('--num_workers', default=0, type=int, metavar='NUM', help=' 线程数')
+parser.add_argument('--num_workers', default=64, type=int, metavar='NUM', help=' 线程数')
 
 # 5. 模型的存储路径
 
-parser.add_argument('--resume', default="checkpoint/checkpoint.pth.tar", type=str, help='最后一个checkpoint断点的路径')
-# parser.add_argument('--resume', default="", type=str, help='最后一个checkpoint断点的路径')
+# parser.add_argument('--resume', default="checkpoint/checkpoint.pth.tar", type=str, help='最后一个checkpoint断点的路径')
+parser.add_argument('--resume', default="", type=str, help='最后一个checkpoint断点的路径')
 parser.add_argument('-c', '--checkpoint', default="checkpoint", type=str, help='checkpoint断点存储路径')
 parser.add_argument('--checkpoint_name', default="checkpoint.pth.tar", type=str, help='checkpoint断点存储路径')
 parser.add_argument('--pth_path', default="pth_files", type=str, help='训练结果存储路径')
