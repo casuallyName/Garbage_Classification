@@ -7,13 +7,20 @@
 # @Email: fjkl@vip.qq.com
 # @Software: PyCharm
 #
-# -*- coding:utf-8 -*-
-
-
+# 进度条
 import sys, time
 
 
 def show(batch, size, msg_behind='', msg_front='', time_show=True):
+    '''
+    进度条展示
+    :param batch:
+    :param size:
+    :param msg_behind:
+    :param msg_front:
+    :param time_show:
+    :return:
+    '''
     if time_show:
         if (batch + 1) < size:
             sys.stdout.write('\r{} {}[{}/{}]{}'.format(

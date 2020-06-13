@@ -71,6 +71,7 @@ def jsonify(*args, **kwargs):
 
     if args and kwargs:
         raise TypeError('jsonify() behavior undefined when passed both args and kwargs')
+
     elif len(args) == 1:  # single args are passed directly to dumps()
         data = args[0]
     else:
@@ -78,5 +79,5 @@ def jsonify(*args, **kwargs):
 
     return current_app.response_class(
         json.dumps(data, indent=indent, separators=separators, sort_keys=False) + '\n',
-        mimetype=current_app.config['JSONIFY_MIMETYPE']
+        mimetype=current_app.config['JSONIFY_MIMETYPE']  # 替换成简短字典格式, 关闭字典排序
     )
