@@ -34,3 +34,9 @@
 | PyTorch | 1.5  |
 | CUDA    | 10.2 |
 
+## 3.模型下载
+
+已训练好的模型保存在Google Drive中，
+
+[ResNeXt_32x16d_WSL_Attention.pth]: https://drive.google.com/file/d/1nvrT-zLlM4SnGC0TyHk5RwIMZVz7CaOp/view?usp=sharing
+
