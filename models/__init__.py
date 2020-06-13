@@ -13,3 +13,5 @@ from .vgg import *
 from .squeezenet import *
 from .inception import *
 from .densenet import *
+from .my_model import*
+from .resnet_atten import *
